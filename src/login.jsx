@@ -1,6 +1,14 @@
 
+import { useState } from "react";
+ const Login = ({onLogin}) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
- const Login = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onLogin(email, password); // ✅ calls App.js function
+  };
+
   return (
     
       <div className="min-h-screen bg-white flex flex-col bg-[url('./assets/loginbg.jpg')] bg-no-repeat bg-position-center bg-cover">
@@ -25,19 +33,19 @@
             <img src="https://spar.mayanksoftwares.co/img/logo.png" alt="SPAR Hypermarket" className="h-10" />
           </div>
 
-          <form className="space-y-4">
+          <form className="space-y-4"   onSubmit={handleSubmit}>
             <div className="text-left">
               <label className="text-white text-sm font-medium">User ID</label>
               <input
-                type="text"
-                placeholder="User ID"
+                type="email"
+                placeholder="User ID" value={email} onChange={(e)=>setEmail(e.target.value)}
                 className="bg-white w-full mt-1 px-3 py-2 rounded-md border border-gray-400 "
               />
             </div>
             <div className="text-left">
               <label className="text-white text-sm font-medium">Password</label>
               <input
-                type="password"
+                type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required
                 placeholder="Password"
                 className="bg-white w-full mt-1 px-3 py-2 rounded-md border border-gray-400 "
               />
